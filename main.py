@@ -17,12 +17,12 @@ def main():
           7) Exit program
           """)
     
-    case = int(input("Enter your choice: "))
+    choice = int(input("Enter your choice: "))
     
-    def switch_case(case):
-        if case == 1:
+    match choice:
+        case 1:        
             pass
-        if case == 2:
+        case 2:
             
             added_counter = 0
             
@@ -38,18 +38,17 @@ def main():
                 
                 added_counter += 1
             
-            print(f'{added_counter} pets added')
+            print(f'{added_counter} pets added')             
                 
-                
-        if case == 3:
+        case 3:
             pass
-        if case == 4:
+        case 4:
             pass
-        if case == 5:
+        case 5:
             pass
-        if case == 6:
+        case 6:
             pass
-        if case == 7:
+        case 7:
             pass
 
 
