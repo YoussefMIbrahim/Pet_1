@@ -23,7 +23,7 @@ def main():
     
     match choice:
         case 1:        
-            pass
+            view_all()
         case 2:
             
             added_counter = 0
@@ -54,6 +54,12 @@ def main():
         case 7:
             pass
 
+
+def view_all(pet_list):
+    print_header()
+    
+    print_footer()
+    
 
 def parse_pet(pet_string):
     return pet_string.strip().split()
