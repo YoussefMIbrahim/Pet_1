@@ -1,3 +1,5 @@
+import Pet
+
 def main():
 
     print_header()
@@ -34,12 +36,13 @@ def main():
                     break
                 
                 pet_info = parse_pet(pet_string)
-                print(pet_info)
+                pet_list.append(Pet.Pet(pet_info[0],pet_info[1]))
                 
                 added_counter += 1
             
             print(f'{added_counter} pets added')             
-                
+            print(f'{pet_list}')
+            
         case 3:
             pass
         case 4:

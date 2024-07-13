@@ -1,9 +1,12 @@
+import itertools
+
 class Pet:
+    
+    id_count = itertools.count()
+    
+    def __init__(self, name, age) -> None:
 
-
-    def __init__(self, id, name, age) -> None:
-
-        self.id = id
+        self.id = next(self.id_count)
         self.name = name
         self.age = age
 
