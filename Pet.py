@@ -29,8 +29,8 @@ class Pet:
         self.age = value
 
 
-    def __str__(self) -> str:
-        pass
+
+
 
 
 
