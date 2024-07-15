@@ -44,15 +44,16 @@ def main():
             print(f'{pet_list}')
             
         case 3:
-            pass
+            print('update pet')
         case 4:
-            pass
+            print('remove pet')
         case 5:
-            pass
+            print('search by name')
         case 6:
-            pass
+            print("search by age")
         case 7:
-            pass
+            quit()
+            
 
 
 def view_all(pet_list):
