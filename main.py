@@ -70,9 +70,36 @@ def main():
                 print(f'{old_name} {old_age} removed')
                 
             case 5:
-                print('search by name')
+                
+                found_list = []
+                name = input('Enter name to search: ').lower()
+                
+                for pet in pet_list:
+                    
+                    if pet.name.lower() == name:
+                        found_list.append(pet)
+                
+                if len(found_list) > 0:
+                    view_all(found_list)
+                else:
+                    print(f'No pets named {name}.')
+                    
+                    
             case 6:
-                print("search by age")
+                
+                found_list = []
+                age = int(input('Enter age to search: '))
+                
+                for pet in pet_list:
+                    
+                    if int(pet.age) == age:
+                        found_list.append(pet)
+                
+                if len(found_list) > 0:
+                    view_all(found_list)
+                else:
+                    print(f'No pets aged {age}.')            
+            
             case 7:
                 quit()
                 
