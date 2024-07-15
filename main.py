@@ -2,64 +2,90 @@ import Pet
 
 def main():
 
-    print_header()
-    print('hey')
-    print_footer(2)
-    
     pet_list = []
     
-    
-    print("""What would you like to do?
-          1) View all pets
-          2) Add more pets
-          3) Update an existing pet.
-          4) Remove an existing pet
-          5) Search pets by name
-          6) Search pets by age
-          7) Exit program
-          """)
-    
-    choice = int(input("Enter your choice: "))
-    
-    match choice:
-        case 1:        
-            view_all()
-        case 2:
-            
-            added_counter = 0
-            
-            while True:
+    while True:
+        
+        print("""What would you like to do?
+            1) View all pets
+            2) Add more pets
+            3) Update an existing pet.
+            4) Remove an existing pet
+            5) Search pets by name
+            6) Search pets by age
+            7) Exit program
+            """)
+        
+        choice = int(input("Enter your choice: "))
+        
+        match choice:
+            case 1:        
+                view_all(pet_list)
+            case 2:
                 
-                pet_string = input('add pet (name, age): ')
+                added_counter = 0
                 
-                if pet_string == 'done':
-                    break
+                while True:
+                    
+                    pet_string = input('add pet (name, age): ')
+                    
+                    if pet_string == 'done':
+                        break
+                    
+                    pet_info = parse_pet(pet_string)
+                    pet_list.append(Pet.Pet(pet_info[0],pet_info[1]))
+                    
+                    added_counter += 1
+                
+                print(f'{added_counter} pets added')             
+                
+            case 3:
+                
+                view_all(pet_list)
+                
+                pet_id = int(input('Enter the pet ID you want to update: '))
+                pet_string = input('update pet (name, age): ')
                 
                 pet_info = parse_pet(pet_string)
-                pet_list.append(Pet.Pet(pet_info[0],pet_info[1]))
                 
-                added_counter += 1
-            
-            print(f'{added_counter} pets added')             
-            print(f'{pet_list}')
-            
-        case 3:
-            print('update pet')
-        case 4:
-            print('remove pet')
-        case 5:
-            print('search by name')
-        case 6:
-            print("search by age")
-        case 7:
-            quit()
-            
+                old_name = pet_list[pet_id].name
+                old_age = pet_list[pet_id].age
+                
+                pet_list[pet_id].set_name(pet_info[0])
+                pet_list[pet_id].set_age(pet_info[1])
+                
+                print(f'{old_name} {old_age} changed to {pet_info[0]} {pet_info[1]}\n' )
+                
+            case 4:
+                
+                view_all(pet_list)
+                
+                pet_id = int(input('Enter the pet ID you want to delete: '))
+                
+                old_name = pet_list[pet_id].name
+                old_age = pet_list[pet_id].age
+                
+                pet_list.pop(pet_id)
+                
+                print(f'{old_name} {old_age} removed')
+                
+            case 5:
+                print('search by name')
+            case 6:
+                print("search by age")
+            case 7:
+                quit()
+                
 
 
 def view_all(pet_list):
+    
     print_header()
     
-    print_footer()
+    for pet in pet_list:
+        print(f"| {pet.id:<3}| {pet.name:<10}| {pet.age:<4}|")
+
+    print_footer(len(pet_list))
     
 
 def parse_pet(pet_string):
