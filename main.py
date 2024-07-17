@@ -3,6 +3,7 @@ from Pet import Pet
 def main():
 
     pet_list = []
+    choice_options = [1,2,3,4,5,6,7,8,9]
     
     while True:
         
@@ -15,9 +16,25 @@ def main():
             6) Search pets by age
             7) Load pets from file
             8) Save and exit
+            9) Exit without saving
             """)
         
-        choice = int(input("Enter your choice: "))
+        
+        while True:
+            
+            try:
+                
+                choice = int(input("Enter your choice: "))
+
+                if choice in choice_options:
+                    break
+                else:
+                    print("Please enter a valid number between 1-9: ")
+           
+            except ValueError:
+                print("Please enter a valid number between 1-9: ")
+        
+        
         
         match choice:
             case 1:
@@ -34,10 +51,11 @@ def main():
                     if pet_string == 'done':
                         break
                     
-                    pet_info = parse_pet(pet_string)
-                    pet_list.append(Pet(pet_info[0],pet_info[1]))
+                    pet_info = validate_input(pet_string)
                     
-                    added_counter += 1
+                    if pet_info is not None:
+                        pet_list.append(Pet(pet_info[0],pet_info[1]))
+                        added_counter += 1
                 
                 print(f'{added_counter} pets added')             
                 
@@ -119,10 +137,30 @@ def main():
                 
                 save_and_exit(filename, pet_list)
                 quit()
-            case 8:
-                pass
+
+            case 9:
+                quit()
                 
 
+
+def validate_input(input):
+    
+    data_list = parse_pet(input)
+    
+    if len(data_list) == 2:
+        try:
+            int(data_list[1])
+            
+            if len(data_list[0]) == 0 or data_list[0] is None:
+                
+                print('Pet name cannot be empty')
+            else:
+                return data_list    
+                
+        except ValueError:
+            print('Please enter a valid number for pet age')
+    else:
+        print('Please make sure you enter a name and age. ')    
 
 def view_all(pet_list):
     
@@ -135,7 +173,12 @@ def view_all(pet_list):
     
 
 def parse_pet(pet_string):
-    return pet_string.strip().split()
+    
+    try:
+        return pet_string.strip().split()
+    except Exception as e:
+        print(e)
+        
 
 def print_footer(count):
     print(f"+{'-'*22}+")
