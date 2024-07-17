@@ -159,19 +159,22 @@ def save_and_exit(filename, pet_list):
 def load_file(filename):
     
     pet_list = []
-    
-    with open(filename, 'r') as file:
+   
+    try:
+        with open(filename, 'r') as file:
+            
+            for line in file:
+                
+                pet_info = parse_pet(line)
+                
+                new_pet = Pet(pet_info[1],pet_info[2])
+                new_pet.set_id(pet_info[0])
+                
+                pet_list.append(new_pet)
         
-        for line in file:
-            
-            pet_info = parse_pet(line)
-            
-            new_pet = Pet(pet_info[1],pet_info[2])
-            new_pet.set_id(pet_info[0])
-            
-            pet_list.append(new_pet)
+        return pet_list if len(pet_list) > 0 else None
     
-    return pet_list if len(pet_list) > 0 else None
-     
+    except FileNotFoundError:
+        print('File does not exist.')
         
 main()
