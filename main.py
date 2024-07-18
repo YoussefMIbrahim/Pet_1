@@ -46,6 +46,11 @@ def main():
                 
                 while True:
                     
+                    if len(pet_list)>= 5:
+                        
+                        print('Pet list full')
+                        break
+                    
                     pet_string = input('add pet (name, age): ')
                     
                     if pet_string == 'done':
